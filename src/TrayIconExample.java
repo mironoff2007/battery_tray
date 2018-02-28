@@ -6,8 +6,7 @@ import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.Toolkit;
 import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.JOptionPane;
 
@@ -33,12 +32,13 @@ public class TrayIconExample {
 
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Image image = toolkit.getImage("bat.png");
+        URL imageUrl=ClassLoader.getSystemResource("bat.png");
+        Image image = toolkit.getImage(imageUrl);//"res/bat.png"
 
         PopupMenu menu = new PopupMenu();
 
         MenuItem messageItem = new MenuItem("Show Message");
-        messageItem.addActionListener(e -> JOptionPane.showMessageDialog(null, "www.java2s.com"));
+        messageItem.addActionListener(e -> JOptionPane.showMessageDialog(null, "message - "+imageUrl));
         menu.add(messageItem);
 
         MenuItem closeItem = new MenuItem("Close");
